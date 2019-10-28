@@ -1,5 +1,5 @@
 import configparser
-from flask import Flask, request
+from flask import abort, Flask, request
 import smtplib
 import sys
 
@@ -20,10 +20,9 @@ def email():
 
     # Connect.
     s = smtplib.SMTP("smtp.gmail.com", 587)
-
     # Authentication.
     s.starttls()
-    s.login(smtpsettings["FromEmailAddress"], smtpSettings["Password"])
+    s.login(smtpsettings["FromEmailAddress"], smtpsettings["Password"])
 
     # Build the message.
     emailMessage = "Subject: {}\n\n{}".format("Contact Message", message)
@@ -34,9 +33,8 @@ def email():
     # Disconnect.
     s.quit()
 
-    # Good response.
     return "True"
   except:
-    return "False"
+    abort(500)
 
 app.run(debug=True, port=8080)
