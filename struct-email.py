@@ -5,7 +5,7 @@ import sys
 
 # Read the config file.
 config = configparser.ConfigParser()
-config.read("config.ini")
+config.read("struct-email.ini")
 config.sections()
 smtpsettings = config["SMTP"]
 
